@@ -6,5 +6,5 @@ Par la suite, je continuerai à ajouter de nouvelles fonctionnalités au projet 
 ## Description
 
 Le projet Mobilhome Service Eyragues est une application web conçue pour fournir une plateforme permettant aux utilisateurs de localiser l'entreprise, de consulter les mobilhomes disponibles et de contacter l'entreprise.
-Pour les administrateurs, l'application permet de gérer les mobilhomes, de gérer les vidéos sur le site, de lire les messages de contact et de gérer le stock.
+Pour les administrateurs, l'application permet de gérer les mobilhomes, de gérer les vidéos sur le site, de lire les messages des contacts et de gérer le stock.
 
