@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rachat de votre mobile home{% endblock %}
+
+{% block body %}
+{{ include('partials/_header.html.twig') }}
+{{ include('partials/_navbar.html.twig') }}
+
+{% for flashMessage in app.flashes('success') %}
+    <div class="alert alert-success text-center">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+{% for flashMessage in app.flashes('error') %}
+    <div class="alert alert-danger text-center">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+
+
+<section class="d-md-flex flex-row">
+    <div class="col-md-5 col-12 order-md-1 order-2">
+        <img src="{{ asset('build/images/image_rachat1.c954a99f.jpg')}}" class="img-fluid" alt="Mobil-home dans un camping">
+    </div>
+    <div class="col-md-7 col-12 text-center order-md-2 order-1">
+        <h1 class="fw-semibold titlecolor mt-5 pb-3">VOUS SOUHAITEZ VOUS SÉPARER DE VOTRE MOBILE HOME</h1>
+        <div class="d-md-flex flex-md-row flex-column">
+            <div class="col-md-5 col-12 m-md-4 border-end border-3 border-dark pe-md-5 ">
+                <h3 class="fw-semibold titlecolor pb-2 mb-md-5">RACHAT À L'UNITÉ</h3>
+                <p>Pas de soucis, Mobilhome Service rachète votre mobile-home d'occasion au meilleur prix. Nous nous occupons de venir chercher votre bien sur place, qu'il soit stationné sur votre terrain, parcelle privée ou dans un camping.<br class="mb-3"> Nous assurons le décalage du mobile-home, la sortie du terrain ou du camping et le transport jusqu'à notre parc afin de lui donner une deuxième vie sur le marché de la seconde main.</p>
+            </div>
+            <div class="col-md-5 col-12 m-md-4 ps-md-3 ">
+                <h3 class="fw-semibold titlecolor pb-2 mb-md-5">RACHAT DE LOTS</h3>
+                <p>Vous avez un ensemble de mobile-homes à vendre ? Mobilhome Service propose également le rachat de lots.<br class="mb-5"> Contactez-nous pour une évaluation personnalisée et bénéficiez d'une solution rapide et avantageuse pour renouveler votre parc. Faites de la place pour la nouveauté avec Mobilhome Service.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div id="form" class="contactForm">
+    <section>
+        <h2 class="text-center m-5  fw-semibold pt-3">FAITES  NOUS DECOUVRIR VOTRE BIEN</h2>
+      
+        <div class="col-md-6 offset-md-3 text-center p-5">
+            {{ form_start(contactForm, {'attr': {'method': 'POST'}}) }}          
+            {# {{form_errors(contactForm)}} #}
+
+            <div class="row mb-3 justify-content-center">
+                    <div class="col-md-6">
+                        {{ form_row(contactForm.last_name,{'attr': {'class': 'form-control form-control-md'}}) }}
+                        {{ form_errors(contactForm.last_name) }}
+                        <br class="d-md-none">
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(contactForm.first_name,{'attr': {'class': 'form-control form-control-md'}}) }}
+                        {{ form_errors(contactForm.first_name) }}
+                    </div>
+            </div>
+
+            <div class="row mb-3 justify-content-center">
+                <div class="col-md-12">
+                    {{ form_row(contactForm.address,{'attr': {'class': 'form-control form-control-md'}}) }}
+                    {{ form_errors(contactForm.address) }}
+                </div>
+            </div>
+            
+            <div class="row mb-3 justify-content-center">
+                <div class="col-md-6">
+                    {{ form_row(contactForm.zip_code,{'attr': {'class': 'form-control form-control-md'}}) }}
+                    {{ form_errors(contactForm.zip_code) }}
+                    <br class="d-md-none">
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(contactForm.city, {'attr': {'class': 'form-control form-control-md'}}) }}
+                    {{ form_errors(contactForm.city) }}
+                </div>
+            </div>
+            
+            <div class="row mb-3 justify-content-center">
+                <div class="col-md-6">
+                    {{ form_row(contactForm.telephone, {'attr': {'class': 'form-control form-control-md'}}) }}
+                    {{ form_errors(contactForm.telephone) }}
+                    <br class="d-md-none">
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(contactForm.email, {'attr': {'class': 'form-control form-control-md'}}) }}
+                    {{ form_errors(contactForm.email) }}
+                </div> 
+            </div>   
+            
+            
+            <div class="row mb-3 justify-content-center">
+                <div class="col-md-12 ">
+                    {{ form_row(contactForm.message, {'attr': {'class': 'form-control form-control-md '}}) }}
+                    {{ form_errors(contactForm.message) }}
+                </div>
+                <div class="row mb-4 justify-content-center mt-2 px-1 d-none ">
+                    <div class="col-md-12">
+                        <div class="d-flex flex-wrap justify-content-center">
+                            <div class="upload-column">
+                                {{ form_row(contactForm.image1) }}
+                            </div>
+                            <div class="upload-column">
+                                {{ form_row(contactForm.image2) }}
+                            </div>
+                            <div class="upload-column">
+                                {{ form_row(contactForm.image3) }}
+                            </div>
+                            <div class="upload-column">
+                                {{ form_row(contactForm.image4) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <div>
+                <div class="pb-3 d-flex flex-row justify-content-center d-none">
+                   <div class="me-2">
+                       {{ form_label(contactForm.budget) }}
+                   </div>
+                    {{ form_widget(contactForm.budget) }}
+                    
+                </div>
+                <div class="col-md-12 d-flex flex-row justify-content-center mb-2 d-none">
+                    <div class="me-2">
+                        {{ form_label(contactForm.terraceInterest) }}
+                    </div>
+                     {{ form_widget(contactForm.terraceInterest) }}
+                </div>
+            </div>
+
+            <button class="btn btn-primary col-md-3">ENVOYER</button>
+                {{ form_end(contactForm) }}
+        </div>
+
+        </section>
+    </div>
+{{ include('partials/_footer.html.twig') }}
+
+{% endblock %}

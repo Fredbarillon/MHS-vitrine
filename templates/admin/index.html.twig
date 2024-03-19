@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Portail admin{% endblock %}
+
+{% block body %}
+{% for flashMessage in app.flashes('success') %}
+    <div class="alert alert-success text-center">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+{% for flashMessage in app.flashes('error') %}
+    <div class="alert alert-danger text-center">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include "partials/_adminnav.html.twig" %}
+            <main class="col-9 ms-5 border border-light bg-white p-2">
+                <h1 class="text-center">Liste des mobilhomes</h1>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Modèle</th>
+                            <th>Marque</th>
+                            <th>Année</th>
+                            <th>Prix</th>
+                            <th>Nb chambre</th>
+                            <th>Actions</th>
+                            <th>Video sur homepage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for mobilhome in mobilhomes %}
+                        <tr>
+                            <td>{{ mobilhome.model }}</td>
+                            <td>{{ mobilhome.brand }}</td>
+                            <td>{{ mobilhome.year }}</td>
+                            <td>{{ mobilhome.price }}</td>
+                            <td>{{ mobilhome.nbBedroom }}</td>
+                            <td class="action-buttons">
+                                <a href="{{ path('app_admin_mobil_editProduct', {'slug': mobilhome.slug}) }}" class="btn btn-success">Modifier</a>
+                                <a href="{{ path('app_admin_mobil_deleteProduct', {'slug': mobilhome.slug}) }}" class="btn btn-danger deleteButton">Supprimer</a>
+                            </td>
+                            <td>
+                                <a href="{{ path('app_admin_select_youtube_link', {'slug': mobilhome.slug}) }}" class="btn btn-primary">Sélectionner la vidéo</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </main>
+            <small class="text-center">Si parfois vous avez des lags ou des actions qui se font en double c'est que je suis en train de faire quelque chose sur le site qui le ralenti. Merci de votre compréhension.</small>
+        </div>
+    </div>
+{% endblock %}

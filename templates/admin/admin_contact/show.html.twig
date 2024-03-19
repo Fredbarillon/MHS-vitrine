@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "partials/_adminnav.html.twig" %}
+        <div class="col-md-6 mx-auto mt-5">
+            <div class="card mt-4">
+                <div class="card-body cardLegend ">
+                    <h5 class="card-title">De: {{ contact.getFirstName() }} {{ contact.getLastName() }}</h5>
+                    <p class="card-text">Email: {{ contact.getEmail() }}</p>
+                    <p class="card-text">Telephone: {{ contact.getTelephone() }}</p>
+                    <p class="card-text">Adresse: {{ contact.getAddress() }}, {{ contact.getZipCode() }} {{ contact.getCity() }}</p>
+                    <p class="card-text">Date: {{ contact.getCreatedAt()|date('d-m-Y H:i') }}</p>
+                    <hr>
+                    <h6 class="card-subtitle mb-2 text-muted">Message:</h6>
+                    <p class="card-text">{{ contact.getMessage() }}</p>
+                    {% if contact.getImage() is not empty %}
+                        <hr>
+                        <h6 class="card-subtitle mb-2 text-muted">Images:</h6>
+                        <div class="row">
+                            {% for image in contact.getImage() %}
+                            <div class="col-md-3">
+                                <a href="{{ asset(image.getFileName()) }}" target="_blank">
+                                    <img src="{{ asset(image.getFileName()) }}" class="img-thumbnail" alt="Image">
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                        <div class="text-center mt-3">
+                            <a href="https://www.google.com/maps/search/?api=1&query={{ contact.getAddress()|url_encode }},{{ contact.getZipCode()|url_encode }},{{ contact.getCity()|url_encode }}" class="btn btn-primary" target="_blank">Trouver l'adresse</a>
+                        </div>
+                    </div>
+                </div>
+                <strong class="text-center">A venir : un bouton qui renvoi au mail pour y répondre</strong>
+        </div>
+    </div>
+</div>
+{% endblock %}

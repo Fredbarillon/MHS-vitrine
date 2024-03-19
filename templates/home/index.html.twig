@@ -1,0 +1,149 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+{{ include('partials/_navbar.html.twig') }}
+{% for flashMessage in app.flashes('success') %}
+    <div class="alert alert-success text-center m-0">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+<section class="row">
+  <div class="card text-bg-dark position-relative">
+    <img src="{{ asset('/build/images/hero_image.5b7c86ec.jpg') }}" class="card-img img-fluid" alt="hero image">
+    <div class="card-img-overlay text-center mt-md-5 centeredTitle col-10 col-md-6 ">
+        <div class="logoFrame rounded shadow text-center p-1">
+          <h1 class="display-4 fw-bold fs-2 fs-md-4 mb-3">MOBILHOME SERVICE</h1>
+          <h5 class="h4 fs-6 fs-md-7 d-none d-md-block">Encore et toujours, notre expérience du mobile-home à votre service.</h5>
+          <h5 class="h4 fs-6 fs-md-7 d-block d-md-none">Encore et toujours, notre expérience du mobile-home à votre service.</h5>
+        </div>
+      </div>
+  </div>
+  <div class="social-icons d-flex align-item-center justify-content-center ">
+    <small class="m-2">Rejoignez nous sur:</small>
+    <a href="https://www.youtube.com/@mobilhomeserviceeyragues4999" target="_blank" class="icon-link">
+      <i class="fa-brands fa-square-youtube fa-2x fa-xlg" style="color: #ff0000;"></i>
+    </a>
+    <a href="https://www.leboncoin.fr/boutique/74109/mobilhome_service.htm" target="_blank" class="icon-link">
+      <img class="img-thumbnail w-100 w-md-auto" id="leboncoin" src="{{ asset('build/images/leboncoin.73ac7814.png')}}" alt="logo leboncoin" style="max-width: 100px; margin-left: 11px">
+    </a>
+  </div>
+</section>
+
+<section>
+  <div class="container col-10 text-center">
+    <h2 class="text-center m-5 fw-semibold pb-4 titlecolor">LES DERNIERS ARRIVES DE NOTRE COLLECTION</h2>
+    <div class="row">
+      {% for data in mobilhomeData %}
+      {% set mobilhome = data.mobilhome %}
+      {% set image = data.image %}
+      {% set isOutOfStock = mobilhome.stock <= 0 %}
+      
+        <div class="col-lg-4 col-md-6 col-12">
+          <a class="text-decoration-none" href="{{ path('app_mobilhome_productDetails', {'slug': mobilhome.slug}) }}">
+            <div class="card cardStyling cardLegend rounded mb-4 shadow">
+              <div class="cardContainerStyling">
+                {% if image %}
+                  <img src="{{ asset(image.fileName) }}" alt="{{ mobilhome.slug }}" class="card-image" loading="lazy">
+                {% else %}
+                  <img src="{{ asset('build/images/mobil_occasion2.4e1a43b7.jpg') }}" alt="{{ mobilhome.slug }}" class="card-image" loading="lazy">
+                {% endif %}
+                <div class="card-img-overlay mx-auto">
+                  {% if mobilhome.isCoupDeCoeur %}
+                    <img src="{{ asset('build/images/heart.png') }}" alt="Heart Icon" id="heart" class="img-fluid">
+                  {% endif %}
+                  {% if isOutOfStock %}
+                    <img src="{{ asset('build/images/sold-out.png') }}" alt="Sold Out Icon" class="img-fluid">
+                  {% endif %}
+                </div>
+              </div>
+              <h6 class="top-left">{{ mobilhome.price|number_format(0, ',', ' ') }} €</h6>
+              <div class="card-body d-flex flex-column text-center">
+                <strong class="card-title">{{ mobilhome.brand }} - "{{ mobilhome.model }}"</strong>
+                <div class="d-flex flex-row justify-content-around">
+                  <p class="card-title"><i class="fa-solid fa-bed"></i> {{ mobilhome.nbBedroom }}</p>
+                  <p class="card-title">{{ mobilhome.year }}</p>
+                  <p class="card-text"><i class="fa-solid fa-maximize"></i> {{ mobilhome.getsurface() }}m²</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>  
+  </div>
+</section>
+
+<section>
+  <div class="card position-relative mx-auto mt-5 imgSize cardLegend">
+    <a href="{{ path('app_mobilhome_occasion') }}" class="text-decoration-none">
+      <img src="{{ asset('/build/images/mobil_home_occasion.bd54df43.jpg') }}" class="img-fluid rounded mx-auto d-block" alt="image de mobilhome d'occasion">
+      
+      <div class="card-img-overlay mx-auto">
+        <h4 class="text-center fw-semibold  img-occasion-text ">Mobile-homes occasion <br> Venez voir tous nos modèles!</h4>
+       </div>
+     </a>    
+   </div>
+</section> 
+  
+<section class="kangaroo w-auto shadow rounded border mt-4">
+  <div class="row">
+    <div class="col-sm-6 order-sm-2">
+      <div class="card position-relative imgSizeRachat shadow cardLegend">
+        <a href="{{ path("app_seller")}}" class="text-decoration-none">
+            <img src="{{ asset('/build/images/image_rachat2.7b8f8470.jpg') }}" class="imgSizeRachat rounded d-block w-100 h-100" alt="image de mobilhome dans un camping">
+            <div class="card-img-overlay text-center">
+              <h5 class="text-center fw-semibold text-light mt-4 d-inline-block centeredTitle ">Vendez votre mobile-home</h5>
+            </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-6 text-center">
+      <a href="{{ path("app_seller")}}" class="m-5 text-dark d-inline-block titlecolor text-decoration-none ">
+        <h2 class="fw-semibold">RACHAT DE MOBILE-HOME</h2>
+      </a>
+        <p class="mb-5 fs-5">Vous souhaitez vous séparer de votre ancien mobile-home sur votre propriété ou dans un camping?</p>
+        <p class="mb-5 fs-4">Que ce soit pour une vente ou dans le but d'une reprise avant un nouvel achat, Mobilhome Service vous propose de racheter et récupérer votre bien au meilleur prix. <a href="{{ path("app_seller")}}" class="fw-semibold text-dark">N'hésitez pas à nous contacter</a>.</p>
+        <p class="mt-5 pt-5"> NB: Les propositions de rachats sont faites en prenant en considération la localisation géographique, l'accessibilité du bien ainsi que son état général. </p>
+    </div>
+  </div>
+</section>
+
+<section class= "text-center  pb-5">
+  <h2 class=" m-5 fw-semibold titlecolor pb-3" id="lienVisiteVirtuelle">VOUS POUVEZ AUSSI VISITER NOS MOBILE-HOMES DEPUIS VOTRE CANAPE ! </h2>
+  <div class="mx-auto ">
+    <iframe width="900" height="700"
+      src="{{ youTubeLink }}"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+      class="border d-none d-md-block mx-auto"></iframe>
+    </iframe>
+    <iframe width="100%" height="300px" 
+      referrerpolicy="no-referrer-when-downgrade"
+      src="{{ youTubeLink }}"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+      class="d-block d-md-none border">
+    </iframe>
+   
+  </div>
+</section>
+
+<section class="kangaroo  w-auto shadow rounded text-center border">
+  <h2 class=" p-4 fw-semibold titlecolor">QUI SOMMES-NOUS ?</h2>
+  <div class=" mx-auto d-flex justify-content-center align-items-center h-100 flex-column writingSection p-3 ">
+    <div>
+      <p class="text-start fs-5">Bienvenue chez Mobilhome Service, votre spécialiste dédié à l'univers du mobile-home d'occasion à Eyragues depuis 1997. Notre engagement envers la satisfaction de nos clients est au cœur de notre mission. Découvrez notre large gamme de mobil-homes de qualité facilement accessibles grâce à notre site, nos annonces sur Leboncoin et notre chaine Youtube.</p>
+      <p class="fs-5">
+        Situé à quelques minutes d'Avignon, venez visiter notre parc ouvert du lundi au vendredi et sur rendez-vous le samedi au 523 Route des jardins 13630 Eyragues. Notre équipe dédiée est prête à vous guider dans le choix du mobile-home de vos rêves. Que vous soyez de la région ou d'ailleurs, nos services de transport sont assurés dans tout le sud de la France et au delà, alors venez découvrir l'excellence et la qualité qui font de nous votre partenaire de confiance dans l'univers du mobile-home.</p>
+    </div>  
+  </div>
+</section>
+
+  {{ include('partials/_footer.html.twig') }}
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+{% block title %}Création nouveau produit{% endblock %} 
+{% block body %}
+    <h1 class="m-4 titlecolor d-flex justify-content-center pb-3">Créer un nouveau Mobilhome</h1>
+
+    <main class="container-fluid me-2 my-5">
+        <section class="row">
+            <div class="col-12">
+                {{ form_start(mobilhomeForm) }}
+                
+                <table class="table table-sm table-bordered table-info mb-4">
+                    <tbody>
+                        <tr>
+                            <td class="align-middle">{{ form_row(mobilhomeForm.brand, {'attr': {'class': 'form- form-control-sm'}}) }}
+                            <td class="align-middle">{{ form_row(mobilhomeForm.model, {'attr': {'class': 'form- form-control-sm'}}) }}
+                            <td class="align-middle">{{ form_row(mobilhomeForm.year, {'attr': {'class': 'form- form-control-sm'}}) }}
+                            <td class="table-warning align-middle">{{ form_row(mobilhomeForm.price, {'attr': {'class': 'form- form-control-sm'}}) }}
+                        </tr>
+                        <tr>
+                            <td class="align-middle">{{ form_row(mobilhomeForm.length, {'attr': {'class': 'form- form-control-sm'}}) }}
+                            <td class="align-middle">{{ form_row(mobilhomeForm.width, {'attr': {'class': 'form- form-control-sm'}}) }}
+                            <td class="align-middle">{{ form_row(mobilhomeForm.nb_bedroom, {'attr': {'class': 'form- form-control-sm'}}) }}
+                            <td class="table-warning align-middle">{{ form_row(mobilhomeForm.stock, {'attr': {'class': 'form- form-control-sm'}}) }}
+                        </tr>
+                        <tr>
+                            <td class="align-middle">{{ form_row(mobilhomeForm.central_livingroom) }}</td>
+                            <td class="align-middle">{{ form_row(mobilhomeForm.oven) }}</td>
+                            <td class="align-middle">{{ form_row(mobilhomeForm.AC) }}</td>
+                            <td class="align-middle">{{ form_row(mobilhomeForm.double_glazing) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+              
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        {{ form_row(mobilhomeForm.description, { 'attr': {'class': 'form-control bg-light shadow border-dark-subtle', 'rows': 6} }) }}
+                    </div>
+                </div>
+             
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        {{ form_row(mobilhomeForm.salesArguments, { 'attr': {'class': 'form-control bg-lightshadow border-dark-subtle', 'rows': 6} }) }}
+                    </div>
+                </div>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered table-warning">
+                                <tbody>
+                                    {% for i in 1..10 %}
+                                        <tr>
+                                            <td>{{ form_row(mobilhomeForm['image' ~ i]) }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="col-md-3 border border-success border-3 p-3 mb-3">
+                            {{ form_row(mobilhomeForm.coupDeCoeur) }}
+                        </div>
+                        <br>
+                        <div class="border border-success border-3 p-3  ">
+                            {{ form_row(mobilhomeForm.youtubeLink, { 'attr': {'class': 'form-control', 'style': 'height: 45px;' } }) }}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class=" text-center">
+                    <button class="btn btn-lg btn-primary ">Mettre en ligne</button>
+                    <a href="{{ path('app_admin_index') }}" class="btn btn-lg btn-danger ms-3">Annuler</a>
+                </div>
+                
+                {{ form_end(mobilhomeForm) }}
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,46 @@
+<div class="navbarControl w-auto shadow border-top" >
+    <div class="container d-md-flex justify-content-around">
+        <section class="border border-dark text-center p-1 shadow bg-light m-2 custom-section col-md-3">
+            <h5 class="titlecolor fw-semibold pb-1 mb-4">MODE DE PAIEMENT</h5>
+            <p><i class="fa-solid fa-money-check pe-1"></i> Chèques </p>
+            <p><i class="fa-solid fa-money-bill-transfer pe-1"></i> Virements bancaires</p>
+        </section>
+
+        <section class="border border-dark text-center p-1 shadow bg-light m-2 custom-section col-md-3">
+            <h5 class="titlecolor fw-semibold pb-1 mb-4">HORAIRES D'OUVERTURE</h5>
+            <p>Du lundi au vendredi<br>Horaire d'hiver:<br> de 09.00 à 12.00 et 14.00 à 18.00
+            <br>Horaire d'été: <br> de 09.00 à 12.00 et 14.00 à 19.00 <br> Samedi: sur rendez-vous</p>
+            
+        </section>
+
+        <section class="border border-dark text-center p-1 shadow bg-light m-2 custom-section col-md-3">
+            <h5 class="titlecolor fw-semibold pb-1 mb-4">MOBILHOME SERVICE</h5>
+            <div>
+                <img id="logo" src="{{ asset('build/images/logo_fond_transparent.5e4b1927.png') }}" alt="logo">
+                <p>523 Route des Jardins 13630 Eyragues <br>Téléphone: 06.24.98.56.30 <br>Email: 
+                    <small class="miniemail">
+                    mobilhome.service@yahoo.com
+                    </small> 
+                </p>
+            </div>
+        </section>
+
+        <section class="border border-dark text-center p-1 shadow bg-light m-2 custom-section col-md-3">
+           <h5 class="titlecolor fw-semibold pb-1 mb-4">CGU</h5>
+            <div >
+                <p class="text-center"><a href="{{path("cgu")}}">Mentions Légales,</a></p>
+                <p class="text-center"><a href="{{ path('cgu') }}#cgu">Conditions générales de ventes,</a></p>
+                <p class=" text-center"> <a href="{{ path('cgu') }}#confidential">Politique de confitentialité,</a></p>
+            </div>
+        </section>
+    </div>
+    <div class="mt-2 d-md-flex justify-content-center text-center">
+        <small class="m-2">Rejoignez nous sur:</small>
+        <a href="https://www.youtube.com/@mobilhomeserviceeyragues4999" target="_blank" class="icon-link me-md-3">
+            <i class="fa-brands fa-square-youtube fa-2x fa-xlg" style="color: #ff0000;"></i>
+        </a>
+        <a href="https://www.leboncoin.fr/boutique/74109/mobilhome_service.htm" target="_blank" class="icon-link">
+            <img class="img-thumbnail w-2 w-md-1" id="leboncoin" src="{{ asset('build/images/leboncoin.73ac7814.png')}}" alt="logo leboncoin">
+        </a>
+    </div>
+</div>

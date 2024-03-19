@@ -1,0 +1,34 @@
+
+
+  <nav class="navbar sticky-top navbar-expand-lg  navbarControl  border-bottom">
+    <div class="container-fluid">
+    <img id="logo" src="{{ asset('build/images/logo_fond_transparent.5e4b1927.png') }}" alt="logo" class="me-3">
+      <a class="navbar-brand text-light{% if app.request.pathinfo == path('home') %} active{% endif %}" href="{{ path('home') }}">ACCUEIL</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-light"  href="{{ path("app_mobilhome_occasion")}}">MOBILE HOME OCCASION</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{{ path("app_contact")}}">CONTACT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" rel="noopener" href="{{ path('home') }}#lienVisiteVirtuelle">VISITE VIRTUELLE</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          {% if app.user or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+          <li class="nav-item">
+            <a class="nav-link navbarLink text-light badge  " href="{{path('app_logout')}}">SE DECONNECTER</a>
+          </li>
+          <li class="nav-item parcourir">
+            <a class="nav-link navbarLink text-light badge" href="{{path('app_admin_index')}}">PORTAIL ADMINISTRATEUR</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>

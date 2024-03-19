@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord Contacts{% endblock %}
+{% block body %}
+{% for flashMessage in app.flashes('success') %}
+    <div class="alert alert-success text-center">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+{% for flashMessage in app.flashes('error') %}
+    <div class="alert alert-danger text-center">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "partials/_adminnav.html.twig" %}
+        <main class="col-9 ms-5 border border-light bg-white p-2">
+            <h1 class="mt-4 mb-4 text-center">Tableau des messages</h1>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telephone</th>
+                            <th scope="col">Adresse</th>
+                            <th scope="col">Acheteur</th>
+                            <th scope="col">Vendeur</th>
+                            <th scope="col">Infos</th>
+                            <th scope="col">date</th>
+                            <th scope="col">Actions</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                            <tr>
+                                <td>{{ contact.getLastName() }}</td>
+                                <td>{{ contact.getEmail() }}</td>
+                                <td>{{ contact.getTelephone() }}</td>
+                                <td>{{ contact.getAddress() }}</td>
+                                <td>{{ contact.isBuyer() ? 'Oui' : 'Non' }}</td>
+                                <td>{{ contact.isSeller() ? 'Oui' : 'Non' }}</td>
+                                <td>{{ contact.isJustWantInfo() ? 'Oui' : 'Non' }}</td>
+                                <td>{{ contact.getCreatedAt()|date('d-m-Y') }}</td>
+                                <td>
+                                    <a href="{{ path('show_contact', {'id': contact.id}) }}" class="btn btn-success">Lire</a>
+                                    <a href="{{ path('delete_contact', {'id': contact.id}) }}" class="btn btn-danger deleteButton">Supprimer</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}
